@@ -1,0 +1,8 @@
+cat > .gitignore << 'EOF'
+.env
+vectorstore/
+extracted_images/
+__pycache__/
+*.pyc
+ocr_results.json
+EOF
