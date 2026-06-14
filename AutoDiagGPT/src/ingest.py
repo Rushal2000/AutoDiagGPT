@@ -191,10 +191,10 @@ def chunk_documents(documents: list) -> list:
 def create_vectorstore(chunks: list) -> Chroma:
     print(f"\nGenerating embeddings using '{EMBEDDING_MODEL}' via Ollama...")
     embeddings = OllamaEmbeddings(
-        model=EMBEDDING_MODEL,
-        base_url=OLLAMA_BASE_URL,
-        model_kwargs={"num_gpu": 0}   # force CPU, no VRAM used
-    )
+    model=EMBEDDING_MODEL,
+    base_url=OLLAMA_BASE_URL,
+    num_gpu=0   # force CPU, no VRAM used — passed directly, not via model_kwargs
+)
     
     # Remove old vector store
     if os.path.exists(VECTORSTORE_DIR):
@@ -253,7 +253,8 @@ def create_vectorstore(chunks: list) -> Chroma:
             continue
 
     if vectorstore is not None:
-        vectorstore.persist()
+        # vectorstore.persist()  # no longer needed/available in newer langchain-chroma
+        pass
 
     print("\n======================================")
     print("Vector Store Creation Complete")

@@ -9,9 +9,7 @@ from retriever import retrieve, format_context, get_source_references
 
 TROUBLESHOOT_PROMPT = PromptTemplate(
     input_variables=["context", "query"],
-    template="""You are **AutoDiagGPT**, an expert troubleshooting assistant for off-highway and commercial vehicles.
-
-You specialize in: hydraulics, BMS, motors, motor controllers, CAN communication, sensors, steering, brakes, and safety circuits.
+    template="""You are **AutoDiagGPT**, an experienced field technician's assistant for off-highway and commercial vehicles.
 
 **STRICT INSTRUCTIONS:**
 - Answer ONLY based on the provided context below.
@@ -24,28 +22,16 @@ Retrieved Context:
 
 Technician's Query: {query}
 
-Provide your answer in this exact format:
-
-### Probable Causes
-- (List the most likely root causes based on the context)
-
-### Diagnostic Checks
-1. (Step-by-step diagnostic procedure)
-
-### Safety Precautions
-- (Relevant safety warnings before/during troubleshooting)
-
-### Corrective Actions
-1. (Step-by-step fix/repair actions)
-
-### Source References
-- (Document name, page number for each piece of information used)
+Give a direct, point-wise answer. Use short bullet points or numbered steps — no long paragraphs, no rigid section headers like "Probable Causes" or "Corrective Actions".
+Just get straight to: what's likely wrong, what to check, and how to fix it, in clear bullet points.
+Include a safety point only if it's directly relevant to this specific issue — keep it brief and inline with the other points, not as a separate section.
+Keep the whole answer concise — aim for 4-8 bullet points total.
 """
 )
 
 CONVERSATION_PROMPT = PromptTemplate(
     input_variables=["context", "query", "chat_history"],
-    template="""You are **AutoDiagGPT**, an expert troubleshooting assistant.
+    template="""You are **AutoDiagGPT**, an experienced field technician's assistant.
 
 Previous Conversation:
 {chat_history}
@@ -55,8 +41,8 @@ Retrieved Context:
 
 Technician's Query: {query}
 
-Answer ONLY based on the context. Use the structured format:
-Probable Causes, Diagnostic Checks, Safety Precautions, Corrective Actions, Source References.
+Answer ONLY based on the context. Give a direct, point-wise answer using short bullet points or numbered steps — no long paragraphs, no rigid section headers.
+Be specific, concise, and safety-conscious. If the context doesn't have enough info, say so clearly instead of guessing.
 """
 )
 

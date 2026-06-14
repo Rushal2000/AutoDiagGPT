@@ -1,4 +1,3 @@
-
 from dotenv import load_dotenv
 import os
 os.environ["OLLAMA_NUM_GPU"] = "0"
@@ -40,14 +39,19 @@ SYSTEM_KEYWORDS = {
         "hydraulic circuit", "hydraulic pump", "pressure",
         "flow", "hose", "cylinder", "boom", "arm",
         "bucket", "work equipment", "relief valve",
-        "oil leakage", "hydraulic breaker"
+        "oil leakage", "hydraulic breaker",
+        "hydraulic filter", "hydraulic system",  # new
+        "swing circuit", "swing motor"            # new
     ],
 
     "engine": [
         "engine", "starting engine", "engine oil",
         "coolant", "radiator", "air cleaner",
         "fuel system", "idle", "engine speed",
-        "overheating", "exhaust", "fuel filter"
+        "overheating", "exhaust", "fuel filter",
+        "turbocharger", "fan belt",               # new
+        "engine valve clearance", "fuel injection", # new
+        "engine oil pan", "PTO"                   # new
     ],
 
     "electrical": [
@@ -55,21 +59,27 @@ SYSTEM_KEYWORDS = {
         "battery", "fuse", "fusible link",
         "wiring", "connector", "switch",
         "starter", "alternator", "voltage",
-        "warning buzzer", "monitor panel"
+        "warning buzzer", "monitor panel",
+        "controller", "electronic control system", # new
+        "starting motor", "wiring harness",        # new
+        "intake air heater", "cab radio", "horn"   # new
     ],
 
     "monitoring": [
         "monitor", "machine monitor",
         "warning lamp", "alarm", "gauge",
         "indicator", "self diagnosis",
-        "display", "warning buzzer"
+        "display", "warning buzzer",
+        "monitor panel", "caution items",          # new
+        "meter display", "overload warning device" # new
     ],
 
     "controls": [
         "control lever", "joystick",
         "pedal", "switch", "lock lever",
         "safety lock lever", "travel lever",
-        "working mode", "active mode"
+        "working mode", "active mode",
+        "wrist control lever", "offset boom"       # new
     ],
 
     "travel_system": [
@@ -77,7 +87,10 @@ SYSTEM_KEYWORDS = {
         "sprocket", "undercarriage",
         "travel motor", "travel speed",
         "moving machine", "swing",
-        "loading", "transportation"
+        "loading", "transportation",
+        "swing machinery", "swing circle",         # new
+        "swing pinion", "final drive",             # new
+        "track tension"                            # new
     ],
 
     "steering": [
@@ -97,7 +110,7 @@ SYSTEM_KEYWORDS = {
         "battery", "electrolyte",
         "charging battery", "booster cable",
         "battery terminal", "battery acid",
-        "hydrogen gas"
+        "hydrogen gas", "battery electrolyte level" # new
     ],
 
     "safety": [
@@ -114,7 +127,8 @@ SYSTEM_KEYWORDS = {
         "bucket with hook", "breaker",
         "crusher", "cutter", "grapple",
         "fork grab", "power ripper",
-        "hydraulic pile driver"
+        "hydraulic pile driver",
+        "ripper", "bucket teeth", "blade"          # new
     ],
 
     "maintenance": [
@@ -123,10 +137,11 @@ SYSTEM_KEYWORDS = {
         "replacement", "wear parts",
         "troubleshooting", "repair",
         "periodic service", "grease",
-        "oil change"
+        "oil change",
+        "filter cartridge", "tightening torque",   # new
+        "service interval"                         # new
     ]
 }
-
 
 def detect_system(text: str) -> str:
     """Auto-detect which vehicle system a text chunk belongs to."""

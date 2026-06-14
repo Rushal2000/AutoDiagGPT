@@ -2,7 +2,7 @@ import pytesseract
 from PIL import Image, ImageFilter, ImageEnhance
 import os
 import json
-from src.config import IMAGE_DIR, OCR_FILE
+from config import IMAGE_DIR, OCR_FILE
 
 
 def preprocess_image(img: Image.Image) -> Image.Image:

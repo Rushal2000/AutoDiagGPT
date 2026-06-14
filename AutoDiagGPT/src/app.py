@@ -17,8 +17,9 @@ with st.sidebar:
 
     system_filter = st.selectbox(
         "Filter by Vehicle System",
-        options=["all", "hydraulics", "bms", "motor", "motor_controller",
-                 "can", "sensors", "steering", "brakes", "safety", "general"],
+        options=["all", "hydraulics", "engine", "electrical", "monitoring",
+                 "controls", "travel_system", "steering", "brakes", "battery",
+                 "safety", "attachments", "maintenance", "general"],
         index=0
     )
     st.divider()
@@ -63,7 +64,7 @@ for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
         if "sources" in message and message["sources"]:
-            with st.expander("Source References"):
+            with st.expander("Retrieved Source Chunks"):
                 for src in message["sources"]:
                     st.markdown(
                         f"- **{src['source']}** - Page {src['page']} "
@@ -94,11 +95,12 @@ if prompt := st.chat_input("Describe the fault or enter an error code..."):
 
                 st.markdown(answer)
                 if sources:
-                    with st.expander("Source References"):
+                    with st.expander("Retrieved Source Chunks"):
                         for src in sources:
                             st.markdown(
                                 f"- **{src['source']}** - Page {src['page']} "
-                                f"(System: {src['system']}, Type: {src['content_type']})")
+                                f"(System: {src['system']}, Type: {src['content_type']}, "
+                                f"Relevance: {src['relevance']})")
                 st.caption(
                     f"Provider: {provider} | "
                     f"Chunks: {result['num_chunks_retrieved']} | "
